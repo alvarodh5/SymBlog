@@ -14,15 +14,15 @@ Dependencies
 4. Symphony.
 
 
-Deployment
+Quick Deployment
 -------------
 Execute in the root project folder:
 
-1. php composer.phar install
-2. Edit the .env file with your DB information (it can be MySQL/SQLite...), make sure that the DB exists.
-3. php bin/console doctrine:migrations:migrate
-4. php bin/console doctrine:fixtures:load
-5. symfony serve
+1. `php composer.phar install`
+2. Edit the .env file with your DB information (it can be MySQL/SQLite...), make sure that the DB exists. Notice that you should change `APP_ENV` value to `prod` in production sites!
+3. `php bin/console doctrine:migrations:migrate`
+4. `php bin/console doctrine:fixtures:load`
+5. `symfony serve`
 
 The admin access credentials are:
 - User: admin@alvaro.com

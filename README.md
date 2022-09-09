@@ -24,9 +24,9 @@ Execute in the root project folder:
 4. php bin/console doctrine:fixtures:load
 5. symfony serve
 
-The access credentials are:
-User: admin@alvaro.com
-Password: admin
+The admin access credentials are:
+- User: admin@alvaro.com
+- Password: admin
 
 Features
 -------------

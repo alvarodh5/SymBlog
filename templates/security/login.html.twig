@@ -1,0 +1,194 @@
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+#}
+{#
+Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+See https://symfony.com/doc/current/security/remember_me.html
+
+<div class="checkbox mb-3">
+    <label>
+        <input type="checkbox" name="_remember_me"> Remember me
+    </label>
+</div>
+#}{#
+<button class="btn btn-lg btn-primary" type="submit">
+    Sign in
+</button>
+</form>
+{% endblock %}
+#}
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+</head>
+
+<body class="fadeIn animated windows-os">
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Admin</a>
+        </div>
+        <div class="collapse navbar-collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <!--<a href="Register.html">
+                        Register
+                    </a>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="wrapper wrapper-full-page">
+    <div class="full-page login-page" data-color="grey" data-image="{{ asset('build/images/bg-admin_big.jpg') }}">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        {# <form action="login.php" method="post" role="form"><input name="__RequestVerificationToken"
+                                                                                  type="hidden"
+                                                                                  value="2tvS-TmcN9ojHBtQ-MNGvQ92atj7TDJlOMVyUhwmT8kmyoIWSte5_7m1D7aMoZZrxYxZ1RhB_bmGhp0Z81nyP2dOAW3YVexNi9Nmv9i8le01"/>
+                            <div class="card">
+                                <div class="header text-center">
+                                        <span class="text-info">
+                                            <i class="fa fa-diamond fa-2x text-center"></i> <br/>
+                                        </span>
+                                </div>
+                                <div class="content">
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        <input class="form-control" data-val="true"
+                                               data-val-email="El campo Email no es una dirección de correo electrónico válida."
+                                               data-val-required="El campo Email es obligatorio." id="Email"
+                                               name="Email" placeholder="Email" type="email" value=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password">Password</label>
+                                        <input class="form-control" data-val="true"
+                                               data-val-required="El campo Password es obligatorio." id="Password"
+                                               name="Password" placeholder="Password" type="password"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="checkbox">
+                                                <span class="icons">
+                                                    <span class="first-icon fa fa-square-o"></span>
+                                                    <span class="second-icon fa fa-check-square-o"></span>
+                                                </span><input data-toggle="checkbox" data-val="true"
+                                                              data-val-required="El campo Remember me? es obligatorio."
+                                                              id="RememberMe" name="RememberMe" type="checkbox"
+                                                              value="true"/><input name="RememberMe" type="hidden"
+                                                                                   value="false"/>
+                                            Remember
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-fill btn-info btn-wd">Login</button>
+                                </div>
+                            </div>
+                        </form> #}
+                        <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            <div class="card">
+                                <div class="header text-center">
+                                        <span class="text-info">
+                                            <i class="fa fa-diamond fa-2x text-center"></i> <br/>
+                                        </span>
+                                </div>
+                                <div class="content">
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        <input class="form-control" data-val="true"
+                                               data-val-email="El campo Email no es una dirección de correo electrónico válida."
+                                               data-val-required="El campo Email es obligatorio." id="Email"
+                                               name="email" placeholder="Email" type="email"
+                                               value="{{ last_username }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password">Password</label>
+                                        <input class="form-control" data-val="true"
+                                               data-val-required="El campo Password es obligatorio." id="Password"
+                                               name="password" placeholder="Password" type="password"/>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-fill btn-info btn-wd">Login</button>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer footer-transparent">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li><a href="../">Go to Blog</a></li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; 2022 Alvaro.</span>
+                </p>
+            </div>
+        </footer>
+
+        <div class="full-page-background"
+             style="background-image: url({{ asset('build/images/bg-admin_big.jpg') }})"></div>
+    </div>
+
+</div>
+</body>
+</html>

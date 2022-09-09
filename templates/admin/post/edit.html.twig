@@ -1,0 +1,77 @@
+{% extends 'admin/base.twig' %}
+
+{% block body %}
+    <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Edit Post</h4>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            {{ form_start(form) }}
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.title) }}
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-newspaper-o"></i>
+                                        </div>
+                                        {{ form_widget(form.title) }}
+
+                                        {{ form_errors(form.title) }}
+                                    </div>
+                                    <span class="field-validation-valid text-danger help-block"
+                                          data-valmsg-for="WebsiteTitle" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.imageFile) }}
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-picture-o"></i>
+                                        </div>
+                                        {{ form_widget(form.imageFile) }}
+
+                                        {{ form_errors(form.imageFile) }}
+                                    </div>
+                                    <span class="field-validation-valid text-danger help-block"
+                                          data-valmsg-for="WebsiteTitle" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {{ form_label(form.category) }}
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-server"></i>
+                                        </div>
+                                        {{ form_widget(form.category) }}
+
+                                        {{ form_errors(form.category) }}
+                                    </div>
+                                    <span class="field-validation-valid text-danger help-block"
+                                          data-valmsg-for="WebsiteTitle" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                {{ form_row(form.content) }}
+
+                                {{ form_errors(form.content) }}
+                            </div>
+
+                            {{ form_widget(form.submit) }}
+
+                            <div class="clearfix"></div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

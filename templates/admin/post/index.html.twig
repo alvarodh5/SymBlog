@@ -1,0 +1,182 @@
+{% extends 'admin/base.twig' %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="container-fluid">
+
+
+            <div class="col-md-12">
+                <a href="{{ path('admin_post_new') }}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Create a Post
+                </a>
+
+                <div class="clearfix"></div>
+                <br/>
+
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Posts</h4>
+                        <p class="category">See all your posts</p>
+                    </div>
+
+                    <div class="content content-full-width">
+                        <ul role="tablist" class="nav nav-tabs">
+                            <li role="presentation" class="active">
+                                <a href="#list-posts" data-toggle="tab">
+                                    <i class="fa fa-newspaper-o"></i> List of Posts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#deleted-posts" data-toggle="tab">
+                                    <i class="fa fa-trash-o"></i> Deleted Posts
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="list-posts" class="tab-pane active">
+                                <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Image
+                                                </th>
+                                                <th>
+                                                    Title
+                                                </th>
+                                                <th>
+                                                    Category
+                                                </th>
+                                                <th>
+                                                    Time
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for post in posts %}
+                                            <tr>
+                                                <td>
+                                                    <img class="image-table" width="100"
+                                                         src="{{ vich_uploader_asset(post) }}">
+                                                </td>
+                                                <td>
+                                                    {{ post.title }}
+                                                </td>
+                                                <td>
+                                                    <a href="#" target="_blank">
+                                                        <i class="fa fa-external-link"></i> {{ post.category.name }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{ post.createdAt|date('Y-m-d H:i:s') }}
+                                                </td>
+                                                <td>
+                                                <span class="text-large">
+                                                    {{ post.content | u.truncate(50) }}
+                                                </span>
+                                                </td>
+                                                <td> 
+                                                    <a id="view" href="{{ path('post', {'id': post.id}) }}"
+                                                       class="btn btn-success btn-xs"
+                                                       data-toggle="tooltip" data-placement="top" title=""
+                                                       data-id="2007" data-original-title="View Post">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+                                                    <a id="edit" href="{{ path('admin_post_edit', {'id': post.id}) }}"
+                                                       class="btn btn-warning btn-xs" data-toggle="tooltip"
+                                                       data-placement="top" title="" data-id="2007"
+                                                       data-original-title="Edit this Post">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+
+                                                    <form method="post" style='display: inline;' action="{{ path('admin_post_delete', {'id': post.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                                                        <button  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                            <div id="deleted-posts" class="tab-pane">
+                                <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped table-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Image
+                                            </th>
+                                            <th>
+                                                Title
+                                            </th>
+                                            <th>
+                                                Category
+                                            </th>
+                                            <th>
+                                                Time
+                                            </th>
+                                            <th>
+                                                Description
+                                            </th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        {% for postDeleted in postsDeleted %} 
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ vich_uploader_asset(postDeleted) }}" width="100">
+                                                </td>
+                                                <td>
+                                                    {{ postDeleted.title }}
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0)" target="_blank">
+                                                        <i class="fa fa-external-link"></i> {{ postDeleted.category.name }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{ postDeleted.createdAt|date('Y-m-d H:i:s') }}
+                                                </td>
+                                                <td>
+                                                    {{ postDeleted.content | u.truncate(50) }}
+                                                </td>
+                                                <td>
+                                                    <a id="view" target="_blank" href="{{ path('post', {'id': postDeleted.id}) }}"
+                                                       class="btn btn-success btn-xs" data-toggle="tooltip"
+                                                       data-placement="top" title="" data-id="2009"
+                                                       data-original-title="View Post">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a id="edit" href="{{ path('admin_post_edit', {'id': postDeleted.id}) }}"
+                                                        class="btn btn-warning btn-xs" data-toggle="tooltip"
+                                                        data-placement="top" title="" data-id="2009"
+                                                        data-original-title="Edit this Post">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

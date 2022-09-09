@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="article-info-wrapper" style="background-image:url({{ vich_uploader_asset(post) }});">
+        <div class="inner">
+            <h2>
+                <a href="javascript:void(0)">
+                    {{ post.title }}
+                </a>
+            </h2>
+
+            <div class="article-meta">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)">
+                            {{ post.createdAt|date('Y-m-d H:i:s') }}
+                        </a>
+                    </li>
+                    <li class="divider">|</li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            {{ post.category.name }}
+                        </a>
+                    </li>
+                    <li class="divider">|</li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            Go to comments
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="inner">
+            <div class="content-wrap">
+                <div class="inner">
+                    <article class="article-content">
+                        <p id="description">
+                            {{ post.content|raw }}
+                        </p>
+                    </article>
+                    <div class="tags-holder">
+                        <ul>
+                            <li class="title">Tags:</li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    {{ post.category.name }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+
+                    <h4 class="section-title">About the author<span></span></h4>
+                    <div class="author-bio">
+                        <div class="author-header" style="background-image: url({{ asset('build/images/10.jpg') }});">
+                            <!--<span class="about">About the author</span>-->
+                            <a href="#" class="author-image">
+                                <img src="{{ asset('build/images/otyoQ5I.png') }}">
+                            </a>
+                        </div>
+                        <div class="data-container">
+                            <a href="#" class="title">Administrator</a>
+                            <p class="message">
+                                Just a simple message :)
+                            </p>
+                        </div>
+                    </div>
+
+                    <?php } ?>
+                    <div class="article-short-navigator">
+                        <a href="{{ path('post', {'id': post.id - 1}) }}" class="previous">
+                            <span class="read-more">Previous Post</span>
+                        </a>
+
+                        <a href="{{ path('post', {'id': post.id + 1}) }}" class="previous">
+                            <span class="read-more">Next Post</span>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="sidebar">
+
+                <div class="sidebar-social-holder twitter">
+                    <div class="asset-holder">
+                        <div class="super-title">Follow us on</div>
+                        <div class="title">twitter</div>
+                        <a href="https://twitter.com/" target="_blank" class="coin"></a>
+                    </div>
+                    <div class="info-holder">
+                        <div class="subscribe-button-holder">
+                            <a class="twitter-follow-button" href="https://twitter.com/" data-show-count="false"
+                               data-size="large" data-lang="en" style="display: block;">
+                                <iframe style="width: 30px; height: 19px; border: 0px;"></iframe>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="sidebar-social-carousel">
+
+                    <div class="tumblr sidebar-social-holder carousel-item" style="display: none;">
+                        <div class="asset-holder">
+                            <div class="super-title">Follow us on</div>
+                            <div class="title">X</div>
+                            <a href="https://google.com" target="_blank" class="coin"></a>
+                        </div>
+                        <div class="info-holder">
+                            <div class="subscribe-button-holder">
+                                <img src="" style="margin-top: -6px;">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tumblr sidebar-social-holder carousel-item" style="display: none;">
+                        <div class="asset-holder">
+                            <div class="super-title">Follow us on</div>
+                            <div class="title">Y</div>
+                            <a href="https://bing.com" target="_blank" class="coin"></a>
+                        </div>
+                        <div class="info-holder">
+                            <div class="subscribe-button-holder">
+                                <a href="https://bing.co" target="_blank">
+                                    <img src="" style="margin-top: -6px;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="google-plus sidebar-social-holder carousel-item" style="display: block;">
+                        <div class="asset-holder">
+                            <div class="super-title">Follow us on</div>
+                            <div class="title">google plus</div>
+                            <a href="https://plus.google.com/" target="_blank" class="coin"></a>
+                        </div>
+                        <div class="info-holder">
+                            <div class="subscribe-button-holder">
+                                <div class="g-follow" data-annotation="bubble" data-height="20"
+                                     data-href="//plus.google.com/" data-rel="author"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="navigator-holder">
+                        <div class="item instagram" onclick="social_nav(this)"></div>
+                        <div class="item tumblr" onclick="social_nav(this)"></div>
+                        <div class="item google active" onclick="social_nav(this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

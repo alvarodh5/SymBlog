@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="inner">
+            <div class="content-wrap">
+                <div class="inner">
+                <h4 class="section-title">Last Posts<span></span></h4>
+                {% for post in posts %}
+                    <article style="min-height:180px;" class="horizontal wow fadeIn">
+                        <a href="{{ path('post', {'id': post.id}) }}" class="article-thumbnail">
+                            <img src="{{ vich_uploader_asset(post) }}"/>
+                        </a>
+                        <div class="article-info">
+                            <div class="article-meta">
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('post', {'id': post.id}) }}" title="Fecha"
+                                            data-tooltip="true" data-placement="top">
+                                            {{ post.createdAt|date('Y-m-d H:i:s') }}
+                                        </a>
+                                    </li>
+                                    <li class="divider">/</li>
+                                    <li>
+                                        <a href="javascript:void(0)" title="Categoria" data-tooltip="true"
+                                            data-placement="top">
+                                            {{ post.category.name }}
+                                        </a>
+                                    </li>
+                                    <li class="divider">/</li>
+                                    <li>
+                                        <a href="{{ path('post', {'id': post.id}) }}" title="Comentarios"
+                                            data-tooltip="true" data-placement="top">
+                                            {{ post.comments.count }} comentarios
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h2 class="article-title">
+                                <a href="{{ path('post', {'id': post.id}) }}" title="" data-tooltip="true"
+                                    data-placement="top">
+                                    {{ post.title }}
+                                </a>
+                            </h2>
+
+                        </div>
+                        <div class="clear"></div>
+                    </article>
+                    {% endfor %}
+                    <div class="navigation">
+                        {{ knp_pagination_render(posts) }}
+                    </div>
+                    <div class="clear"></div>
+                    
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="sidebar-social-holder twitter">
+                    <div class="asset-holder">
+                        <div class="super-title">Follow us on</div>
+                        <div class="title">twitter</div>
+                        <a href="https://twitter.com/" target="_blank" class="coin"></a>
+                    </div>
+                    <div class="info-holder">
+                        <div class="subscribe-button-holder">
+                            <a class="twitter-follow-button" href="https://twitter.com/" data-show-count="false"
+                               data-size="large" data-lang="en" style="display: block;">
+                                <iframe style="width: 30px; height: 19px; border: 0px;"></iframe>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="sidebar-social-holder instagram">
+                    <div class="asset-holder">
+                        <div class="super-title">Follow us on</div>
+                        <div class="title">instagram</div>
+                        <a href="https://instagram.com/" target="_blank" class="coin"></a>
+                    </div>
+                    <div class="info-holder">
+                        <div class="subscribe-button-holder">
+                            <a class="instagram-follow-button" href="https://instagram.com/" data-show-count="false"
+                               data-size="large" data-lang="en" style="display: block;">
+                                <iframe style="width: 30px; height: 19px; border: 0px;"></iframe>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="sidebar-social-holder google-plus">
+                    <div class="asset-holder">
+                        <div class="super-title">Send your feedback at</div>
+                        <div class="title">Google</div>
+                        <a href="https://google.com/" target="_blank" class="coin"></a>
+                    </div>
+                    <div class="info-holder">
+                        <div class="subscribe-button-holder">
+                            <a class="google-follow-button" href="https://google.com/" data-show-count="false"
+                               data-size="large" data-lang="en" style="display: block;">
+                                <iframe style="width: 30px; height: 19px; border: 0px;"></iframe>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

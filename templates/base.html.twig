@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Alvaro Blog{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    <style>
+    /* Pagination */
+    .pagination {
+        display: inline-block;
+    }
+    
+    .pagination span {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+    }
+    </style>
+</head>
+
+<body class="fadeIn animated">
+<div id="page-holder" data-controller="index">
+        <span class="side-menu-button icon-menu gradient" onclick="sidemenuToggle(this)"
+              style="top: -100px; display: block;">
+            <i class="fa fa-bars"></i>
+        </span>
+    <div id="side-holder">
+        <div class="logo-holder gradient"><a href="#" class="icon-logo"></a></div>
+        <ul>
+            <li>
+                <form action="{{ path('post_search') }}" class="search-form" method="get">
+                    <input type="text" value="" name="search"
+                           placeholder="search text"
+                           class="search-input">
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="content-holder">
+        <div class="head-logo">
+            <a href="{{ path('index') }}" class="logo">
+                <i style="font-size: 85px;" class="fa fa-diamond"></i>
+            </a>
+        </div>
+
+
+        <header class="gradient">
+            <div class="inner">
+                <div class="clear"></div>
+                <ul class="main-nav left-nav">
+                    <li>
+                        <a href="{{ path('contact') }}">
+                            <i class="fa fa-envelope"></i>
+                            <span class="text">Contact</span>
+                        </a>
+                    </li>
+                    <li class="border"></li>
+
+                </ul>
+                <ul class="main-nav right-nav">
+                    <li>
+                        <div class="dropdown-wrapper">
+                            <div class="triangle"></div>
+                            <ul class="categories">
+                                <li>
+                                    <a href="https://twitter.com/" target="_blank">
+                                        <i class="fa fa-twitter"></i>
+                                        <span class="text">
+                                                Twitter
+                                            </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:alvaro@alvaro.com" target="_blank">
+                                        <i class="fa fa-envelope"></i>
+                                        <span class="text">
+                                                Mail
+                                            </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#">
+                            <i class="fa fa-hashtag"></i>
+                            <span class="text">Follow us</span>
+                        </a>
+                    </li>
+                    <li class="border"></li>
+                    <li>
+                        <a href="#" data-action="index#search_toggle" class="search-button">
+                            <i class="fa fa-search"></i>
+                            <span class="text">Search</span>
+                        </a>
+                    </li>
+                    <li class="border"></li>
+                    <li>
+                        <a href="{{ path('app_login') }}">
+                            <i class="fa fa-user"></i>
+                            <span class="text">Login</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+            <div class="search-holder">
+                <form method="get" action="{{ path('post_search') }}">
+                    <input type="text" name="search" placeholder="Texto a buscar" class="search-input" autocomplete="off">
+                    <a class="fa fa-times close" data-action="index#search_toggle"></a>
+                </form>
+            </div>
+        </header>
+
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+<div class="footer">
+    <ul>
+        <li><a href="{{ path('contact') }}">Contact</a></li>
+    </ul>
+    <p>Copyright © 2022 Alvaro.</p>
+</div>
+
+</body>
+</html>

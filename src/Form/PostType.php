@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints\Image;
+
 
 class PostType extends AbstractType
 {
@@ -24,7 +26,10 @@ class PostType extends AbstractType
             ])
             ->add('imageFile', VichFileType::class, [
                 'label' => "Image post",
-                'attr' => ['class' => 'form-control text-box single-line', 'placeholder' => 'Image Post'] 
+                'attr' => ['class' => 'form-control text-box single-line', 'placeholder' => 'Image Post', 'accept' => "image/*"],
+                'constraints' => [
+                    new Image()
+                ]
             ])
             ->add('category', EntityType::class, [
                 'label' => "POST CATEGORY",
